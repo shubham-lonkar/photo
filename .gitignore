@@ -1,0 +1,6 @@
+# Full-resolution originals stay local; only the resized copies in assets/photos/ are published.
+originals/
+
+__pycache__/
+.DS_Store
+Thumbs.db

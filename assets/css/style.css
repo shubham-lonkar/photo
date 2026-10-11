@@ -1,0 +1,473 @@
+/* Colors and type mirror shubham-lonkar.github.io so both sites read as one. */
+
+:root {
+  color-scheme: dark;
+
+  --bg: #0a0a0a;
+  --text: #e9e3d5;
+  --text-strong: #f4efe2;
+  --text-soft: #c7bfad;
+  --text-muted: #8f8776;
+  --text-faint: #746c5d;
+  --rule: #262320;
+  --link-underline: #5c5749;
+  --tile: #171512;
+
+  --row-h: 240px; /* keep in sync with ROW_HEIGHT in scripts/build.py */
+  --gap: 8px;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #f7f2e9;
+  --text: #2b2620;
+  --text-strong: #15120d;
+  --text-soft: #47402f;
+  --text-muted: #6c6350;
+  --text-faint: #8a8270;
+  --rule: #e4ddc9;
+  --link-underline: #b6ac93;
+  --tile: #ece5d6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 18px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+body:has(.lightbox[open]) {
+  overflow: hidden;
+}
+
+a {
+  color: var(--text-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--link-underline);
+  transition: text-decoration-color 140ms ease;
+}
+
+a:hover {
+  text-decoration-color: var(--text-strong);
+}
+
+:focus-visible {
+  outline: 2px solid var(--text-strong);
+  outline-offset: 3px;
+}
+
+.site-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(48px, 8vw, 88px) clamp(16px, 4vw, 40px) clamp(48px, 8vw, 80px);
+}
+
+/* ── Header ── */
+
+.site-header {
+  margin-bottom: clamp(40px, 7vw, 72px);
+}
+
+.site-name {
+  margin: 0 0 18px;
+  font-size: clamp(2.1rem, 6vw, 2.9rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text-strong);
+  letter-spacing: -0.02em;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+}
+
+.site-nav a {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--text-strong);
+  text-decoration: underline;
+  text-decoration-color: var(--text-strong);
+  text-underline-offset: 3px;
+}
+
+.site-nav .nav-contact {
+  padding: 3px 13px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--text);
+}
+
+.site-nav .nav-contact:hover {
+  color: var(--text-strong);
+  border-color: var(--text-muted);
+  text-decoration: none;
+}
+
+/* ── Typography ── */
+
+h1 {
+  margin: 0 0 28px;
+  font-size: clamp(1.4rem, 3.5vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--text-strong);
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-strong);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--text-strong);
+}
+
+p {
+  margin: 0 0 22px;
+  color: var(--text-soft);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.site-section {
+  scroll-margin-top: 32px;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: clamp(48px, 7vw, 72px) 0;
+}
+
+/* ── Gallery: justified rows, every photo keeps its aspect ratio ── */
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+
+/* Soaks up leftover space so the last row isn't stretched. */
+.gallery::after {
+  content: "";
+  flex-grow: 1000000;
+}
+
+.gallery-item {
+  flex-grow: var(--r);
+  flex-basis: calc(var(--r) * var(--row-h));
+  aspect-ratio: var(--r);
+  display: block;
+  overflow: hidden;
+  background: var(--tile);
+  cursor: zoom-in;
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms ease, opacity 200ms ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.025);
+}
+
+/* ── About ── */
+
+.about {
+  max-width: 680px;
+}
+
+.about-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  margin-bottom: clamp(36px, 6vw, 52px);
+}
+
+.headshot {
+  flex: none;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--tile);
+}
+
+.gear-heading {
+  margin-bottom: 14px;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-entry {
+  padding: 18px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.info-entry:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.info-entry p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.about-contact {
+  margin-top: 32px;
+}
+
+.site-footer {
+  margin-top: clamp(64px, 10vw, 104px);
+}
+
+.site-footer p {
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+.site-footer a {
+  color: var(--text-muted);
+}
+
+/* ── Round buttons (theme toggle, back to top, viewer controls) ── */
+
+.round-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease, background-color 200ms ease, opacity 160ms ease, transform 160ms ease;
+}
+
+.round-btn:hover {
+  color: var(--text-strong);
+  border-color: var(--text-muted);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: clamp(16px, 4vw, 32px);
+  right: clamp(16px, 4vw, 32px);
+  z-index: 10;
+}
+
+.to-top {
+  position: fixed;
+  right: clamp(16px, 4vw, 32px);
+  bottom: clamp(16px, 4vw, 32px);
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ── Full-screen viewer ── */
+
+.lightbox {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+.lightbox::backdrop {
+  background: var(--bg);
+}
+
+.lightbox-figure {
+  height: 100%;
+  margin: 0;
+  padding: 64px 72px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.lightbox-img {
+  display: block;
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.lightbox-caption {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px 14px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.lightbox-count {
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.lightbox-gear {
+  color: var(--text-soft);
+}
+
+.lightbox-gear:empty,
+.lightbox-exposure:empty {
+  display: none;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 1.4rem;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-prev {
+  left: 16px;
+}
+
+.lightbox-next {
+  right: 16px;
+}
+
+/* ── Small screens ── */
+
+@media (max-width: 600px) {
+  :root {
+    --row-h: 160px; /* about one photo per row */
+    --gap: 6px;
+  }
+
+  body {
+    font-size: 17px;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  .about-intro {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .headshot {
+    width: 112px;
+    height: 112px;
+  }
+
+  .lightbox-figure {
+    padding: 64px 12px 76px;
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    top: auto;
+    bottom: 16px;
+    transform: none;
+  }
+
+  .lightbox-prev {
+    left: calc(50% - 52px);
+  }
+
+  .lightbox-next {
+    right: calc(50% - 52px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .gallery-item img {
+    transition: none;
+  }
+
+  .gallery-item:hover img {
+    transform: none;
+  }
+}
